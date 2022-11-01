@@ -243,15 +243,18 @@ def IPC_Data():
             mainpower02 = json.load(b)
         b.close
         
+        print (mainpower01["power"])
+        print (mainpower02["power"])
         
-        TotalMainPower = mainpower01["power"]+mainpower02["power"]
+        
+        TotalMainPower = float(mainpower01["power"])+float(mainpower02["power"])
         clamp[0]["Main_Power"] = TotalMainPower
     
         PowerPayload[0] = [{"access_token": "nV5IbdeFN3I2Wjud96d8",
              "app": "ems_demo_fet",
              "type": "3P3WMETER",
              "data": [{"values":clamp[0]}]}]
-    
+        
         with open('static/data/ipc.json', 'w') as f:
             json.dump(PowerPayload[0][0]["data"][0]["values"], f)
         f.close
