@@ -85,6 +85,7 @@ def read_Main_PowerMeter(PORT,ID,loop):
         pw_power = master.execute(ID, cst.READ_HOLDING_REGISTERS, 338, 1)
         pw_pf = master.execute(ID, cst.READ_HOLDING_REGISTERS, 358, 1)
         pw_consum = master.execute(ID, cst.READ_HOLDING_REGISTERS, 385, 2)
+        pw_DM = master.execute(ID, cst.READ_HOLDING_REGISTERS, 362, 2)
         
         MainPW_meter[0] = round(pw_va[0] * 0.1,1)
         MainPW_meter[1] = round(pw_cur[1] * 0.001,1)
@@ -92,18 +93,11 @@ def read_Main_PowerMeter(PORT,ID,loop):
         MainPW_meter[3] = round(pw_cur[5] * 0.001,1)
         MainPW_meter[4] = round(pw_power[0] * 0.01,1)
         MainPW_meter[5] = pw_pf[0]
-        MainPW_meter[5] = ReadFloat((pw_consum[0],pw_consum[1]))
-        #MainPW_meter[6] = round((pw_consum[1] + pw_consum[0] * 65535)*0.1,1)
+        #MainPW_meter[5] = ReadFloat((pw_consum[0],pw_consum[1]))
+        MainPW_meter[6] = round((pw_consum[1] + pw_consum[0] * 65535)*0.1,1)
         #MainPW_meter[6] = round(pw_consum[0],1)
         MainPW_meter[7] = 1
-        #MainPW_meter[0] =  round(pw_va[0] * 0.1,1)
-        #MainPW_meter[1] =  round(pw_cur[0] * 0.01,1)
-        #MainPW_meter[2] =  round(pw_cur[1] * 0.01,1)
-        #MainPW_meter[3] =  round(pw_cur[2] * 0.01,1)
-        #MainPW_meter[4] =  round(pw_power[0] * 0.01,1) 
-        #MainPW_meter[5] =  round(pw_pf[0]*0.001,1)
-        #MainPW_meter[6] =  round((pw_consum[1] + pw_consum[0] * 65535)*0.1,1)
-        #MainPW_meter[7] = 1 
+        MainPW_meter[8] = pw_consum[1] + pw_consum[0] * 65535
         master.close()
         #time.sleep(0.5)
         return (MainPW_meter)
@@ -117,6 +111,7 @@ def read_Main_PowerMeter(PORT,ID,loop):
         MainPW_meter[5] = 0
         MainPW_meter[6] = 0
         MainPW_meter[7] = 2
+        MainPW_meter[8] = 0
         master.close()
         time.sleep(0.5)
         return (MainPW_meter)
@@ -152,31 +147,65 @@ def get_MainPayLoad(payload1,payload2):
     clamp=[{"voltage":{}},{"voltage":{}},{"voltage":{}}]
     
     try:
-        clamp[0]["voltage"]=round(payload1[0])
-        clamp[0]["current_r"]=round(payload1[1],1)
-        clamp[0]["current_s"]=round(payload1[2],1)
-        clamp[0]["current_t"]=round(payload1[3],1)
-        clamp[0]["temperature_r"]=0
-        clamp[0]["temperature_s"]=0
-        clamp[0]["temperature_t"]=0
-        clamp[0]["power"]= round(payload1[4],1)
-        clamp[0]["pf"]= round(payload1[5]*100)
-        clamp[0]["energy"] = round(payload1[6],1)
-        clamp[0]["alive"]= 1
-        payload_data = [{"values":clamp}]
-
-        clamp[1]["voltage"]=round(payload2[0])
-        clamp[1]["current_r"]=round(payload2[1],1)
-        clamp[1]["current_s"]=round(payload2[2],1)
-        clamp[1]["current_t"]=round(payload2[3],1)
-        clamp[1]["temperature_r"]=0
-        clamp[1]["temperature_s"]=0
-        clamp[1]["temperature_t"]=0
-        clamp[1]["power"]= round(payload2[4],1)
-        clamp[1]["pf"]= round(payload2[5]*100)
-        clamp[1]["energy"] = round(payload2[6],1)
-        clamp[1]["alive"]= 1
-        payload_data = [{"values":clamp}]
+        if payload1[7] == 1:
+            clamp[0]["voltage"]=round(payload1[0])
+            clamp[0]["current_r"]=round(payload1[1],1)
+            clamp[0]["current_s"]=round(payload1[2],1)
+            clamp[0]["current_t"]=round(payload1[3],1)
+            clamp[0]["temperature_r"]=0
+            clamp[0]["temperature_s"]=0
+            clamp[0]["temperature_t"]=0
+            clamp[0]["power"]= round(payload1[4],1)
+            clamp[0]["pf"]= round(payload1[5]*100)
+            clamp[0]["energy"] = round(payload1[6],1)
+            clamp[0]["alive"]= 1
+            clamp[0]["dm"]= payload1[8]
+            payload_data = [{"values":clamp}]
+        else:
+            clamp[0]["voltage"]=0
+            clamp[0]["current_r"]=0
+            clamp[0]["current_s"]=0
+            clamp[0]["current_t"]=0
+            clamp[0]["temperature_r"]=0
+            clamp[0]["temperature_s"]=0
+            clamp[0]["temperature_t"]=0
+            clamp[0]["battery_r"]=0
+            clamp[0]["battery_s"]=0
+            clamp[0]["battery_t"]=0
+            clamp[0]["power"]= 0
+            clamp[0]["pf"]= 0
+            clamp[0]["alive"]= 2
+            clamp[0]["dm"]= 0
+        
+        if payload2[7] == 1:
+            clamp[1]["voltage"]=round(payload2[0])
+            clamp[1]["current_r"]=round(payload2[1],1)
+            clamp[1]["current_s"]=round(payload2[2],1)
+            clamp[1]["current_t"]=round(payload2[3],1)
+            clamp[1]["temperature_r"]=0
+            clamp[1]["temperature_s"]=0
+            clamp[1]["temperature_t"]=0
+            clamp[1]["power"]= round(payload2[4],1)
+            clamp[1]["pf"]= round(payload2[5]*100)
+            clamp[1]["energy"] = round(payload2[6],1)
+            clamp[1]["alive"]= 1
+            clamp[1]["dm"]= payload2[8]
+            payload_data = [{"values":clamp}]
+        else:
+            clamp[1]["voltage"]=0
+            clamp[1]["current_r"]=0
+            clamp[1]["current_s"]=0
+            clamp[1]["current_t"]=0
+            clamp[1]["temperature_r"]=0
+            clamp[1]["temperature_s"]=0
+            clamp[1]["temperature_t"]=0
+            clamp[1]["battery_r"]=0
+            clamp[1]["battery_s"]=0
+            clamp[1]["battery_t"]=0
+            clamp[1]["power"]= 0
+            clamp[1]["pf"]= 0
+            clamp[1]["alive"]= 2
+            clamp[1]["dm"]= 0
     except:
         for i in range(2):
             clamp[i]["voltage"]=0
@@ -192,6 +221,7 @@ def get_MainPayLoad(payload1,payload2):
             clamp[i]["power"]= 0
             clamp[i]["pf"]= 0
             clamp[i]["alive"]= 2
+            clamp[i]["dm"]= 0
         payload_data = [{"values":clamp}]
             
     clamp[0]["Loop_name"] = "F4NP1_normalpower"
