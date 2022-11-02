@@ -1,50 +1,55 @@
 # coding:utf-8
 import codecs
-import json
-import ssl
-import paho.mqtt.client as mqtt
 import time
+import serial
+import modbus_tk.defines as cst
+from modbus_tk import modbus_rtu
+import json  
+import struct
 
-if __name__ == '__main__':
-    while True:
-        meter_token = 'smartbuilding_device'
-        FETnet_passwd = '?3NXw+Pp'
+def read_Main_PowerMeter(PORT,ID,loop):
+    loop = loop - 1
+    MainPW_meter = [0,0,0,0,0,0,0,0,0]
+    try:
+        master = modbus_rtu.RtuMaster(serial.Serial(port=PORT, baudrate=9600, bytesize=8, parity='N', stopbits=1, xonxoff=0))
+        master.set_timeout(5.0)
+        master.set_verbose(True)
+        pw_va = master.execute(ID, cst.READ_HOLDING_REGISTERS, 320, 1)
+        pw_cur = master.execute(ID, cst.READ_HOLDING_REGISTERS, 321, 6)
+        pw_power = master.execute(ID, cst.READ_HOLDING_REGISTERS, 337, 2)
+        pw_pf = master.execute(ID, cst.READ_HOLDING_REGISTERS, 358, 1)
+        pw_consum = master.execute(ID, cst.READ_HOLDING_REGISTERS, 385, 2)
+        pw_DM = master.execute(ID, cst.READ_HOLDING_REGISTERS, 362, 2)
+        
+        MainPW_meter[0] = round(pw_va[0] * 0.1,1)
+        MainPW_meter[1] = round(pw_cur[1] * 0.001,1)
+        MainPW_meter[2] = round(pw_cur[3] * 0.001,1)
+        MainPW_meter[3] = round(pw_cur[5] * 0.001,1)
+        #MainPW_meter[4] = round((pw_power[1]*65536 + pw_power[0]) * 0.001,1)
+        MainPW_meter[4] = round((pw_power[1]*65536 + pw_power[0]) * 0.001,1)
+        MainPW_meter[5] = round(pw_pf[0]*0.1,1)
+        #MainPW_meter[5] = ReadFloat((pw_consum[0],pw_consum[1]))
+        MainPW_meter[6] = round((pw_consum[1]* 65536 + pw_consum[0] )*0.1,1)
+        #MainPW_meter[6] = round(pw_consum[0],1)
+        MainPW_meter[7] = 1
+        MainPW_meter[8] = pw_consum[0] + pw_consum[1] * 65536
+        master.close()
+        #time.sleep(0.5)
+        return (MainPW_meter)
 
+    except:
+        MainPW_meter[0] = 0
+        MainPW_meter[1] = 0
+        MainPW_meter[2] = 0
+        MainPW_meter[3] = 0
+        MainPW_meter[4] = 0
+        MainPW_meter[5] = 0
+        MainPW_meter[6] = 0
+        MainPW_meter[7] = 2
+        MainPW_meter[8] = 0
+        return (MainPW_meter)
     
-        data01  = [
-            {"access_token": "aqknLWRH5UD3sjMqnTOA",
-             "app": "ems_demo_fet",
-             "ts": 1663824407000,
-             "type": "METER",
-             "data": [{"values": {
-                 "voltage": "22",
-                 "current_r": "50",
-                 "current_s": "380",
-                 "current_t": "300",
-                 "power": "20",
-                 "pf": "20",
-                 "energy": "20",
-                 "temperature_r": "20",
-                 "temperature_s": "23",
-                 "temperature_t": "25",
-                 "demand": "20",
-                 "alive": "20",
-                 "remark": "20",
-        }}]}]
+    if __name__ == '__main__':
     
-        client = mqtt.Client('', True, None, mqtt.MQTTv31)
-        client.username_pw_set(meter_token, FETnet_passwd)
-        context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-        client.tls_set_context(context)
-        client.connect("mqttd.fetnet.net", 8883, 60)
-        client.loop_start()
-        time.sleep(1)
-        data02 = client.on_connect
-        data03 = client.publish('/ems/v1/telemetry/demoNH220',json.dumps(data01))
-        print(data02)
-        print(data03)
-        time.sleep(3)
-        client.loop_stop()
-        client.disconnect()
-        time.sleep(10)
-
+        print(read_Main_PowerMeter('/dev/ttyS1',1,1))
+        print(read_Main_PowerMeter('/dev/ttyS1',2,1))
