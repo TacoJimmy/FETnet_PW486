@@ -214,20 +214,23 @@ def Mainloop02Cal():
     return PowerPayload
 '''
 def MqttPublish():
-    MainLoop01 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',1,1)
-    MainLoop02 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',2,1)
-    MainPayload = FET_modbusrtu.get_MainPayLoad(MainLoop01,MainLoop02)
-    MqttMainSend(MainPayload)
-    SubACLoop01 = FET_modbusrtu.read_3p3w_meter('/dev/ttyS1',3,1)
-    SubACLoop02 = FET_modbusrtu.read_3p3w_meter('/dev/ttyS1',4,1)
-    ACPayload = FET_modbusrtu.get_ACPayLoad(SubACLoop01,SubACLoop02)
-    MqttACSend(ACPayload)
-    SubLoop01 = FET_modbustcp.getPowerLoop01('192.168.1.10',502,MainLoop01[0],MainLoop01[5])
-    MqttSend(SubLoop01)
-    SubLoop02 = FET_modbustcp.getPowerLoop02('192.168.1.11',502,MainLoop01[0],MainLoop01[5])
-    MqttSend(SubLoop02)
-    
-    
+    try:
+        MainLoop01 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',1,1)
+        MainLoop02 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',2,1)
+        MainPayload = FET_modbusrtu.get_MainPayLoad(MainLoop01,MainLoop02)
+        MqttMainSend(MainPayload)
+        SubACLoop01 = FET_modbusrtu.read_3p3w_meter('/dev/ttyS1',3,1)
+        SubACLoop02 = FET_modbusrtu.read_3p3w_meter('/dev/ttyS1',4,1)
+        ACPayload = FET_modbusrtu.get_ACPayLoad(SubACLoop01,SubACLoop02)
+        MqttACSend(ACPayload)
+        SubLoop01 = FET_modbustcp.getPowerLoop01('192.168.1.10',502,MainLoop01[0],MainLoop01[5])
+        MqttSend(SubLoop01)
+        SubLoop02 = FET_modbustcp.getPowerLoop02('192.168.1.11',502,MainLoop01[0],MainLoop01[5])
+        MqttSend(SubLoop02)
+        print("ok")
+        
+    except:
+        print ('error')
     '''
     try:
         #PowerInfor = PowerLoop()
@@ -324,13 +327,13 @@ def IPC_Data():
             clamp[0]["Main_Power"] = round(TotalMainPower,1)
             clamp[0]["dm"] = round(TotalDM,1)
             clamp[0]["ACPower"] = round(TotalACPower,1)
-            clamp[0]["ACPower_prece"] = round(TotalACPower / TotalMainPower*100,4)
+            clamp[0]["ACPower_prece"] = round(TotalACPower / TotalMainPower*100,1)
             clamp[0]["SocketPower"] = round(TotalSocketPower,1)
-            clamp[0]["SocketPower_p"] = round(TotalSocketPower / TotalMainPower*100,4)
+            clamp[0]["SocketPower_p"] = round(TotalSocketPower / TotalMainPower*100,1)
             clamp[0]["LightPower"] = round(TotalLightPower,1)
-            clamp[0]["LightPower_p"] = round(TotalLightPower / TotalMainPower*100,4)
+            clamp[0]["LightPower_p"] = round(TotalLightPower / TotalMainPower*100,1)
             clamp[0]["BackupPower"] = round(TotalBackupPower,1)
-            clamp[0]["BackupPower_p"] = round(TotalBackupPower / TotalMainPower*100,4)
+            clamp[0]["BackupPower_p"] = round(TotalBackupPower / TotalMainPower*100,1)
         else:
             clamp[0]["Main_Power"] = 0
             clamp[0]["dm"] = 0
