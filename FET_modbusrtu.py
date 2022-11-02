@@ -54,7 +54,7 @@ def read_3p3w_meter(PORT,ID,loop):
         MainPW_meter[3] =  round(pw_cur[2] * 0.01,1)
         MainPW_meter[4] =  round(pw_power[0] * 0.01,1) 
         MainPW_meter[5] =  round(pw_pf[0]*0.001,1)
-        MainPW_meter[6] =  round((pw_consum[1] + pw_consum[0] * 65535)*0.1,1)
+        MainPW_meter[6] =  round((pw_consum[1]* 65536 + pw_consum[0] * 65535)*0.1,1)
         MainPW_meter[7] = 1 
         master.close()
         time.sleep(0.5)
@@ -94,10 +94,10 @@ def read_Main_PowerMeter(PORT,ID,loop):
         MainPW_meter[4] = round((pw_power[1]*65536 + pw_power[0]) * 0.01,1)
         MainPW_meter[5] = pw_pf[0]
         #MainPW_meter[5] = ReadFloat((pw_consum[0],pw_consum[1]))
-        MainPW_meter[6] = round((pw_consum[1] + pw_consum[0] * 65535)*0.1,1)
+        MainPW_meter[6] = round((pw_consum[1]* 65536 + pw_consum[0] )*0.1,1)
         #MainPW_meter[6] = round(pw_consum[0],1)
         MainPW_meter[7] = 1
-        MainPW_meter[8] = pw_consum[1] + pw_consum[0] * 65535
+        MainPW_meter[8] = pw_consum[1] + pw_consum[0] * 65536
         master.close()
         #time.sleep(0.5)
         return (MainPW_meter)
