@@ -48,7 +48,7 @@ def powermanageMessage():
     if request.method == "GET":
         with open('static/data/message.json', 'r') as f:
             data = json.load(f)
-            print("text : ", data)
+            #print("text : ", data)
         f.close
         return jsonify(data)
 
@@ -57,7 +57,7 @@ def poweripc():
     if request.method == "GET":
         with open('static/data/ipc.json', 'r') as f:
             data = json.load(f)
-            print("text : ", data)
+            #print("text : ", data)
         f.close
         return jsonify(data)
 
@@ -157,7 +157,7 @@ def getDataMessage():
     if request.method == "GET":
         with open('static/data/message.json', 'r') as f:
             data = json.load(f)
-            print("text : ", data)
+            #print("text : ", data)
         f.close
         return jsonify(data)
 
