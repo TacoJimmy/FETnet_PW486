@@ -75,7 +75,7 @@ def read_3p3w_meter(PORT,ID,loop):
 
 def read_Main_PowerMeter(PORT,ID,loop):
     loop = loop - 1
-    MainPW_meter = [0,0,0,0,0,0,0,0]
+    MainPW_meter = [0,0,0,0,0,0,0,0,0]
     try:
         master = modbus_rtu.RtuMaster(serial.Serial(port=PORT, baudrate=9600, bytesize=8, parity='N', stopbits=1, xonxoff=0))
         master.set_timeout(5.0)
@@ -112,8 +112,6 @@ def read_Main_PowerMeter(PORT,ID,loop):
         MainPW_meter[6] = 0
         MainPW_meter[7] = 2
         MainPW_meter[8] = 0
-        master.close()
-        time.sleep(0.5)
         return (MainPW_meter)
 '''
 def get_subloop01():
@@ -175,7 +173,7 @@ def get_MainPayLoad(payload1,payload2):
             clamp[0]["power"]= 0
             clamp[0]["pf"]= 0
             clamp[0]["alive"]= 2
-            clamp[0]["dm"]= 0
+            clamp[0]["dm"]= 2
         
         if payload2[7] == 1:
             clamp[1]["voltage"]=round(payload2[0])
@@ -205,7 +203,7 @@ def get_MainPayLoad(payload1,payload2):
             clamp[1]["power"]= 0
             clamp[1]["pf"]= 0
             clamp[1]["alive"]= 2
-            clamp[1]["dm"]= 0
+            clamp[1]["dm"]= 3
     except:
         for i in range(2):
             clamp[i]["voltage"]=0
@@ -221,7 +219,7 @@ def get_MainPayLoad(payload1,payload2):
             clamp[i]["power"]= 0
             clamp[i]["pf"]= 0
             clamp[i]["alive"]= 2
-            clamp[i]["dm"]= 0
+            clamp[i]["dm"]= 3
         payload_data = [{"values":clamp}]
             
     clamp[0]["Loop_name"] = "F4NP1_normalpower"
