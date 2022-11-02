@@ -155,7 +155,7 @@ def get_MainPayLoad(payload1,payload2):
             clamp[0]["temperature_s"]=35
             clamp[0]["temperature_t"]=35
             clamp[0]["power"]= round(payload1[4],1)
-            clamp[0]["pf"]= round(payload1[5]*100)
+            clamp[0]["pf"]= round(payload1[5])
             clamp[0]["energy"] = round(payload1[6],1)
             clamp[0]["alive"]= 1
             clamp[0]["dm"]= payload1[8]
@@ -185,7 +185,7 @@ def get_MainPayLoad(payload1,payload2):
             clamp[1]["temperature_s"]=35
             clamp[1]["temperature_t"]=35
             clamp[1]["power"]= round(payload2[4],1)
-            clamp[1]["pf"]= round(payload2[5]*100)
+            clamp[1]["pf"]= round(payload2[5])
             clamp[1]["energy"] = round(payload2[6],1)
             clamp[1]["alive"]= 1
             clamp[1]["dm"]= payload2[8]
