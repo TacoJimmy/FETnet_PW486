@@ -288,17 +288,17 @@ def IPC_Data():
         b.close
         
         TotalMainPower = float(mainpower01["power"])+float(mainpower02["power"])
-        print(TotalMainPower)
+        
         TotalDM = float(mainpower01["dm"])+float(mainpower02["dm"])
-        print(TotalDM)
+        
         TotalACPower = ACpower01["power"]+ACpower02["power"]
-        print(TotalACPower)
+        
         TotalSocketPower = SocketPower01["power"]+SocketPower02["power"]
-        print(TotalSocketPower)
+        
         TotalLightPower = LightPower01["power"]+LightPower02["power"]
-        print(TotalLightPower)
+        
         TotalBackupPower = BackupPower01["power"]+BackupPower02["power"]
-        print(TotalBackupPower)
+        
         
         if TotalMainPower != 0:
             clamp[0]["Main_Power"] = TotalMainPower
