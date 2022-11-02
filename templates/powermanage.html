@@ -142,6 +142,15 @@
                     success: function (data) {
                         $IPCData.text("");
                         $IPCData.append("power[kW] : " + data.Main_Power + "<br>");
+						$IPCData.append("DM[W] : " + data.dm + "<br>");
+						$IPCData.append("ACPower[kW] : " + data.ACPower + "<br>");
+						$IPCData.append("ACPower[%] : " + data.ACPower_prece + "<br>");
+						$IPCData.append("SocketPower[kW] : " + data.SocketPower + "<br>");
+						$IPCData.append("SocketPower[%] : " + data.SocketPower_p + "<br>");
+						$IPCData.append("LightPower[kW] : " + data.LightPower + "<br>");
+						$IPCData.append("LightPower[%] : " + data.LightPower_p + "<br>");
+						$IPCData.append("BackupPower[kW] : " + data.BackupPower + "<br>");
+						$IPCData.append("BackupPower_p[%] : " + data.BackupPower_p + "<br>");
                         
                     },
                     error: function (xhr) {
@@ -171,7 +180,7 @@
                         $PowerMainLoop01.append("battery_t : " + data.battery_t + "<br>");
                         $PowerMainLoop01.append("power[kW] : " + data.power + "<br>");
                         $PowerMainLoop01.append("pf[%] : " + data.pf + "<br>");
-						$PowerMainLoop01.append("DM[W] : " + data.pf + "<br>");
+						$PowerMainLoop01.append("DM[W] : " + data.dm + "<br>");
                         
                     },
                     error: function (xhr) {
@@ -199,7 +208,7 @@
                         $PowerMainLoop02.append("battery_t : " + data.battery_t + "<br>");
                         $PowerMainLoop02.append("power[kW] : " + data.power + "<br>");
                         $PowerMainLoop02.append("pf[%] : " + data.pf + "<br>");
-						$PowerMainLoop02.append("DM[W] : " + data.pf + "<br>");
+						$PowerMainLoop02.append("DM[W] : " + data.dm + "<br>");
                         
                     },
                     error: function (xhr) {
