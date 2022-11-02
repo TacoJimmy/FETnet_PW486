@@ -52,9 +52,9 @@ def read_3p3w_meter(PORT,ID,loop):
         MainPW_meter[1] =  round(pw_cur[0] * 0.01,1)
         MainPW_meter[2] =  round(pw_cur[1] * 0.01,1)
         MainPW_meter[3] =  round(pw_cur[2] * 0.01,1)
-        MainPW_meter[4] =  round(pw_power[0] * 0.01,1) 
-        MainPW_meter[5] =  round(pw_pf[0]*0.001,1)
-        MainPW_meter[6] =  round((pw_consum[0]* 65536 + pw_consum[1] * 65535)*0.1,1)
+        MainPW_meter[4] =  round(pw_power[0]) 
+        MainPW_meter[5] =  round(pw_pf[0]*0.1,1)
+        MainPW_meter[6] =  round((pw_consum[0]* 65536 + pw_consum[1])*0.1,1)
         MainPW_meter[7] = 1 
         master.close()
         time.sleep(0.5)
@@ -204,7 +204,7 @@ def get_MainPayLoad(payload1,payload2):
             clamp[1]["power"]= 0
             clamp[1]["pf"]= 0
             clamp[1]["alive"]= 2
-            clamp[1]["dm"]= 3
+            clamp[1]["dm"]= 0
     except:
         for i in range(2):
             clamp[i]["voltage"]=0
@@ -220,7 +220,7 @@ def get_MainPayLoad(payload1,payload2):
             clamp[i]["power"]= 0
             clamp[i]["pf"]= 0
             clamp[i]["alive"]= 2
-            clamp[i]["dm"]= 3
+            clamp[i]["dm"]= 0
         payload_data = [{"values":clamp}]
             
     clamp[0]["Loop_name"] = "F4NP1_normalpower"
