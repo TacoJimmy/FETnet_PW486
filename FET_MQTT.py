@@ -147,7 +147,7 @@ def Mainloop01Cal():
     except:
         clamp[0]["alive"]= 0
         
-    clamp[0]["Loop_name"]= "F4NP1_�鞎�鞈∵迤��蕭"
+    clamp[0]["Loop_name"]= "F4NP1_嚙踐���蕭�豰�餈歹蕭嚙踐筑�"
     
     PowerPayload[0] = [{"access_token": "WImETF1BotX8l1xIkZ3K",
              "app": "ems_demo_fet",
@@ -200,7 +200,7 @@ def Mainloop02Cal():
     except:
         clamp[0]["alive"]= 0
         
-    clamp[0]["Loop_name"]= "F4NE1_嚙踝蕭謕�鞈∵迤��蕭"
+    clamp[0]["Loop_name"]= "F4NE1_���雓嚙踝豰�餈歹蕭嚙踐筑�"
     
     PowerPayload[0] = [{"access_token": "wFeXyzMjZvTB4hhZ6a1c",
              "app": "ems_demo_fet",
@@ -328,7 +328,7 @@ def IPC_Data():
             clamp[0]["SocketPower"] = round(TotalSocketPower,1)
             clamp[0]["SocketPower_p"] = round(TotalSocketPower / TotalMainPower*100,4)
             clamp[0]["LightPower"] = round(TotalLightPower,1)
-            clamp[0]["LightPower_p"] = round(TotalLightPower / TotalMainPower)
+            clamp[0]["LightPower_p"] = round(TotalLightPower / TotalMainPower*100,4)
             clamp[0]["BackupPower"] = round(TotalBackupPower,1)
             clamp[0]["BackupPower_p"] = round(TotalBackupPower / TotalMainPower*100,4)
         else:
