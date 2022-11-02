@@ -194,6 +194,21 @@ def Mainloop02Cal():
     return PowerPayload
     
 def MqttPublish():
+    MainLoop01 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',1,1)
+    MainLoop02 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',2,1)
+    MainPayload = FET_modbusrtu.get_MainPayLoad(MainLoop01,MainLoop02)
+    MqttMainSend(MainPayload)
+    SubACLoop01 = FET_modbusrtu.read_3p3w_meter('/dev/ttyS1',3,1)
+    SubACLoop02 = FET_modbusrtu.read_3p3w_meter('/dev/ttyS1',4,1)
+    ACPayload = FET_modbusrtu.get_ACPayLoad(SubACLoop01,SubACLoop02)
+    MqttACSend(ACPayload)
+    SubLoop01 = FET_modbustcp.getPowerLoop01('192.168.1.10',502,MainLoop01[0],MainLoop01[5])
+    MqttSend(SubLoop01)
+    SubLoop02 = FET_modbustcp.getPowerLoop02('192.168.1.11',502,MainLoop01[0],MainLoop01[5])
+    MqttSend(SubLoop02)
+    
+    
+    '''
     try:
         #PowerInfor = PowerLoop()
         
@@ -229,26 +244,86 @@ def MqttPublish():
     except:
         print ('error')
         return ('error')
-
+    '''
 def IPC_Data():
     PowerPayload ={}
     clamp=[{"voltage":{}},{"voltage":{}},{"voltage":{}}]
+    
+        
     try:
-        
-        
         with open('static/data/PowerMainLoop01.json', 'r') as a:
             mainpower01 = json.load(a)
         a.close
         with open('static/data/PowerMainLoop02.json', 'r') as b:
             mainpower02 = json.load(b)
         b.close
-        
-        print (mainpower01["power"])
-        print (mainpower02["power"])
-        
+        #normal AirCondition
+        with open('static/data/PowerSubLoop01.json', 'r') as b:
+            ACpower01 = json.load(b)
+        b.close
+        #Backup AirCondition
+        with open('static/data/PowerSubLoop02.json', 'r') as b:
+            ACpower02 = json.load(b)
+        b.close
+        with open('static/data/PowerSubLoop03.json', 'r') as b:
+            SocketPower01 = json.load(b)
+        b.close
+        #Backup AirCondition
+        with open('static/data/PowerSubLoop06.json', 'r') as b:
+            SocketPower02 = json.load(b)
+        b.close
+        with open('static/data/PowerSubLoop04.json', 'r') as b:
+            LightPower01 = json.load(b)
+        b.close
+        #Backup AirCondition
+        with open('static/data/PowerSubLoop07.json', 'r') as b:
+            LightPower02 = json.load(b)
+        b.close
+        with open('static/data/PowerSubLoop05.json', 'r') as b:
+            BackupPower01 = json.load(b)
+        b.close
+        #Backup AirCondition
+        with open('static/data/PowerSubLoop08.json', 'r') as b:
+            BackupPower02 = json.load(b)
+        b.close
         
         TotalMainPower = float(mainpower01["power"])+float(mainpower02["power"])
-        clamp[0]["Main_Power"] = TotalMainPower
+        print(TotalMainPower)
+        TotalDM = float(mainpower01["dm"])+float(mainpower02["dm"])
+        print(TotalDM)
+        TotalACPower = ACpower01["power"]+ACpower02["power"]
+        print(TotalACPower)
+        TotalSocketPower = SocketPower01["power"]+SocketPower02["power"]
+        print(TotalSocketPower)
+        TotalLightPower = LightPower01["power"]+LightPower02["power"]
+        print(TotalLightPower)
+        TotalBackupPower = BackupPower01["power"]+BackupPower02["power"]
+        print(TotalBackupPower)
+        
+        if TotalMainPower != 0:
+            clamp[0]["Main_Power"] = TotalMainPower
+            clamp[0]["dm"] = TotalDM
+            clamp[0]["ACPower"] = TotalACPower
+            clamp[0]["ACPower_prece"] = round(TotalACPower / TotalMainPower,1)
+            clamp[0]["SocketPower"] = TotalSocketPower
+            clamp[0]["SocketPower_p"] = round(TotalSocketPower / TotalMainPower,1)
+            clamp[0]["LightPower"] = TotalLightPower
+            clamp[0]["LightPower_p"] = round(TotalLightPower / TotalMainPower)
+            clamp[0]["BackupPower"] = TotalBackupPower
+            clamp[0]["BackupPower_p"] = round(TotalBackupPower / TotalMainPower,1)
+        else:
+            clamp[0]["Main_Power"] = 0
+            clamp[0]["dm"] = 0
+            clamp[0]["ACPower"] = 0
+            clamp[0]["ACPower_prece"] = 0
+            clamp[0]["SocketPower"] = 0
+            clamp[0]["SocketPower_p"] = 0
+            clamp[0]["LightPower"] = 0
+            clamp[0]["LightPower_p"] = 0
+            clamp[0]["BackupPower"] = 0
+            clamp[0]["BackupPower_p"] = 0
+        
+
     
         PowerPayload[0] = [{"access_token": "nV5IbdeFN3I2Wjud96d8",
              "app": "ems_demo_fet",
@@ -293,5 +368,6 @@ def Pub_infor():
 if __name__ == '__main__':
     while True:
         #PowerLoop()
-        MqttPublish()
+        #MqttPublish()
+        IPC_Data()
         time.sleep(60)
