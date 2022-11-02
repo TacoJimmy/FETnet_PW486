@@ -87,6 +87,26 @@ def MqttACSend(mod_payload):
         print ('error')
         return ('error')
 
+def MqttIPCSend(mod_payload):
+    Mqttinfor = ReadMqttInfor()
+    try:
+        client = mqtt.Client('', True, None, mqtt.MQTTv31)
+        client.username_pw_set(Mqttinfor['appInfo']['MQTT_UserName'], Mqttinfor['appInfo']['MQTT_Password'])
+        context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+        client.tls_set_context(context)
+        client.connect(Mqttinfor['appInfo']['MQTT_url'], Mqttinfor['appInfo']['MQTT_Port'], 60)
+        client.loop_start()
+        time.sleep(1)
+        data02 = client.on_connect
+        data03 = client.publish(Mqttinfor['appInfo']['MQTT_topic'],json.dumps(mod_payload[0]))
+        time.sleep(2)
+        client.loop_stop()
+        client.disconnect()
+        time.sleep(1)
+    except:
+        print ('error')
+        return ('error')
+
 def Mainloop01Cal():
     try:
         clamp=[{"voltage":{}},{"voltage":{}},{"voltage":{}}]
@@ -127,7 +147,7 @@ def Mainloop01Cal():
     except:
         clamp[0]["alive"]= 0
         
-    clamp[0]["Loop_name"]= "F4NP1_常用總電源"
+    clamp[0]["Loop_name"]= "F4NP1_撣貊蝮賡皞�"
     
     PowerPayload[0] = [{"access_token": "WImETF1BotX8l1xIkZ3K",
              "app": "ems_demo_fet",
@@ -180,7 +200,7 @@ def Mainloop02Cal():
     except:
         clamp[0]["alive"]= 0
         
-    clamp[0]["Loop_name"]= "F4NE1_備用總電源"
+    clamp[0]["Loop_name"]= "F4NE1_��蝮賡皞�"
     
     PowerPayload[0] = [{"access_token": "wFeXyzMjZvTB4hhZ6a1c",
              "app": "ems_demo_fet",
@@ -333,6 +353,8 @@ def IPC_Data():
         with open('static/data/ipc.json', 'w') as f:
             json.dump(PowerPayload[0][0]["data"][0]["values"], f)
         f.close
+        
+        return PowerPayload
         
     except:
         pass
