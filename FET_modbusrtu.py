@@ -82,7 +82,7 @@ def read_Main_PowerMeter(PORT,ID,loop):
         master.set_verbose(True)
         pw_va = master.execute(ID, cst.READ_HOLDING_REGISTERS, 320, 1)
         pw_cur = master.execute(ID, cst.READ_HOLDING_REGISTERS, 321, 6)
-        pw_power = master.execute(ID, cst.READ_HOLDING_REGISTERS, 338, 1)
+        pw_power = master.execute(ID, cst.READ_HOLDING_REGISTERS, 337, 2)
         pw_pf = master.execute(ID, cst.READ_HOLDING_REGISTERS, 358, 1)
         pw_consum = master.execute(ID, cst.READ_HOLDING_REGISTERS, 385, 2)
         pw_DM = master.execute(ID, cst.READ_HOLDING_REGISTERS, 362, 2)
@@ -91,10 +91,10 @@ def read_Main_PowerMeter(PORT,ID,loop):
         MainPW_meter[1] = round(pw_cur[1] * 0.001,1)
         MainPW_meter[2] = round(pw_cur[3] * 0.001,1)
         MainPW_meter[3] = round(pw_cur[5] * 0.001,1)
-        MainPW_meter[4] = round(pw_power[0] * 0.01,1)
+        MainPW_meter[4] = round((pw_power[0]*65536 + pw_power[1]) * 0.01,1)
         MainPW_meter[5] = pw_pf[0]
         #MainPW_meter[5] = ReadFloat((pw_consum[0],pw_consum[1]))
-        MainPW_meter[6] = round((pw_consum[1] + pw_consum[0] * 65535)*0.1,1)
+        MainPW_meter[6] = round((pw_consum[0] + pw_consum[1] * 65535)*0.1,1)
         #MainPW_meter[6] = round(pw_consum[0],1)
         MainPW_meter[7] = 1
         MainPW_meter[8] = pw_consum[1] + pw_consum[0] * 65535
