@@ -51,5 +51,9 @@ def read_Main_PowerMeter(PORT,ID,loop):
     
 if __name__ == '__main__':
     
-        print(read_Main_PowerMeter('/dev/ttyS1',1,1))
-        print(read_Main_PowerMeter('/dev/ttyS1',2,1))
+        #print(read_Main_PowerMeter('/dev/ttyS1',1,1))
+        #print(read_Main_PowerMeter('/dev/ttyS1',2,1))
+        
+        MainLoop01 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',1,1)
+        MainLoop02 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',2,1)
+        MainPayload = FET_modbusrtu.get_MainPayLoad(MainLoop01,MainLoop02)
