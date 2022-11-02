@@ -304,13 +304,13 @@ def IPC_Data():
             clamp[0]["Main_Power"] = TotalMainPower
             clamp[0]["dm"] = TotalDM
             clamp[0]["ACPower"] = TotalACPower
-            clamp[0]["ACPower_prece"] = round(TotalACPower / TotalMainPower,1)
+            clamp[0]["ACPower_prece"] = round(TotalACPower / TotalMainPower,4)*100
             clamp[0]["SocketPower"] = TotalSocketPower
-            clamp[0]["SocketPower_p"] = round(TotalSocketPower / TotalMainPower,1)
+            clamp[0]["SocketPower_p"] = round(TotalSocketPower / TotalMainPower,4)*100
             clamp[0]["LightPower"] = TotalLightPower
             clamp[0]["LightPower_p"] = round(TotalLightPower / TotalMainPower)
             clamp[0]["BackupPower"] = TotalBackupPower
-            clamp[0]["BackupPower_p"] = round(TotalBackupPower / TotalMainPower,1)
+            clamp[0]["BackupPower_p"] = round(TotalBackupPower / TotalMainPower,4)*100
         else:
             clamp[0]["Main_Power"] = 0
             clamp[0]["dm"] = 0
