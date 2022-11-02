@@ -106,7 +106,7 @@ def MqttIPCSend(mod_payload):
     except:
         print ('error')
         return ('error')
-
+'''
 def Mainloop01Cal():
     try:
         clamp=[{"voltage":{}},{"voltage":{}},{"voltage":{}}]
@@ -212,7 +212,7 @@ def Mainloop02Cal():
     f.close
     
     return PowerPayload
-    
+'''
 def MqttPublish():
     MainLoop01 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',1,1)
     MainLoop02 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',2,1)
