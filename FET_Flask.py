@@ -20,7 +20,7 @@ class Config(object):
             'args': (1, 2),   
             'trigger': 'interval',
             #'minutes': 1
-            'seconds': 5
+            'seconds': 20
             
         },
         {
@@ -249,7 +249,7 @@ def setDataMqtt01():
 
 def publish_PowerMeter(a, b):
     
-    #FET_MQTT.MqttPublish()
+    FET_MQTT.MqttPublish()
     FET_MQTT.IPC_Data()
     
 def read_com1(a, b):
