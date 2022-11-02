@@ -19,8 +19,8 @@ class Config(object):
             'func': '__main__:publish_PowerMeter',
             'args': (1, 2),   
             'trigger': 'interval',
-            #'minutes': 1
-            'seconds': 20
+            'minutes': 1
+            #'seconds': 20
             
         },
         {
