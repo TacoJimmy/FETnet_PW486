@@ -252,6 +252,7 @@ def publish_PowerMeter(a, b):
     FET_MQTT.MqttPublish()
     IPCpayload = FET_MQTT.IPC_Data()
     FET_MQTT.MqttIPCSend(IPCpayload)
+    print ("ok")
     
 def read_com1(a, b):
     
