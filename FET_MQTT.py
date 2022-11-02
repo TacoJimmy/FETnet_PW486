@@ -147,7 +147,7 @@ def Mainloop01Cal():
     except:
         clamp[0]["alive"]= 0
         
-    clamp[0]["Loop_name"]= "F4NP1_撣貊蝮賡皞�"
+    clamp[0]["Loop_name"]= "F4NP1_�鞎�鞈∵迤��蕭"
     
     PowerPayload[0] = [{"access_token": "WImETF1BotX8l1xIkZ3K",
              "app": "ems_demo_fet",
@@ -200,7 +200,7 @@ def Mainloop02Cal():
     except:
         clamp[0]["alive"]= 0
         
-    clamp[0]["Loop_name"]= "F4NE1_��蝮賡皞�"
+    clamp[0]["Loop_name"]= "F4NE1_嚙踝蕭謕�鞈∵迤��蕭"
     
     PowerPayload[0] = [{"access_token": "wFeXyzMjZvTB4hhZ6a1c",
              "app": "ems_demo_fet",
@@ -321,16 +321,16 @@ def IPC_Data():
         
         
         if TotalMainPower != 0:
-            clamp[0]["Main_Power"] = TotalMainPower
-            clamp[0]["dm"] = TotalDM
-            clamp[0]["ACPower"] = TotalACPower
-            clamp[0]["ACPower_prece"] = round(TotalACPower / TotalMainPower,4)*100
-            clamp[0]["SocketPower"] = TotalSocketPower
-            clamp[0]["SocketPower_p"] = round(TotalSocketPower / TotalMainPower,4)*100
-            clamp[0]["LightPower"] = TotalLightPower
+            clamp[0]["Main_Power"] = round(TotalMainPower,1)
+            clamp[0]["dm"] = round(TotalDM,1)
+            clamp[0]["ACPower"] = round(TotalACPower,1)
+            clamp[0]["ACPower_prece"] = round(TotalACPower / TotalMainPower*100,4)
+            clamp[0]["SocketPower"] = round(TotalSocketPower,1)
+            clamp[0]["SocketPower_p"] = round(TotalSocketPower / TotalMainPower*100,4)
+            clamp[0]["LightPower"] = round(TotalLightPower,1)
             clamp[0]["LightPower_p"] = round(TotalLightPower / TotalMainPower)
-            clamp[0]["BackupPower"] = TotalBackupPower
-            clamp[0]["BackupPower_p"] = round(TotalBackupPower / TotalMainPower,4)*100
+            clamp[0]["BackupPower"] = round(TotalBackupPower,1)
+            clamp[0]["BackupPower_p"] = round(TotalBackupPower / TotalMainPower*100,4)
         else:
             clamp[0]["Main_Power"] = 0
             clamp[0]["dm"] = 0
