@@ -49,7 +49,7 @@ def read_Main_PowerMeter(PORT,ID,loop):
         MainPW_meter[8] = 0
         return (MainPW_meter)
     
-    if __name__ == '__main__':
+if __name__ == '__main__':
     
         print(read_Main_PowerMeter('/dev/ttyS1',1,1))
         print(read_Main_PowerMeter('/dev/ttyS1',2,1))
