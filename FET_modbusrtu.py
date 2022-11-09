@@ -98,7 +98,7 @@ def read_Main_PowerMeter(PORT,ID,loop):
         MainPW_meter[6] = round((pw_consum[0]* 65536 + pw_consum[1] )*0.1,1)
         #MainPW_meter[6] = round(pw_consum[0],1)
         MainPW_meter[7] = 1
-        MainPW_meter[8] = round((pw_DM[0] * 65536 + pw_DM[1]))
+        MainPW_meter[8] = round(((pw_DM[0] * 65536 + pw_DM[1])*0.001),1)
         master.close()
         #time.sleep(0.5)
         return (MainPW_meter)
