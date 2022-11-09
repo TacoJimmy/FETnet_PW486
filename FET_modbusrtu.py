@@ -52,7 +52,7 @@ def read_3p3w_meter(PORT,ID,loop):
         MainPW_meter[1] =  round(pw_cur[0] * 0.01,1)
         MainPW_meter[2] =  round(pw_cur[1] * 0.01,1)
         MainPW_meter[3] =  round(pw_cur[2] * 0.01,1)
-        MainPW_meter[4] =  round(pw_power[0]*0.01,1) 
+        MainPW_meter[4] =  round(pw_power[0],1) 
         MainPW_meter[5] =  round(pw_pf[0]*0.1,1)
         MainPW_meter[6] =  round((pw_consum[0]* 65536 + pw_consum[1])*0.1,1)
         MainPW_meter[7] = 1 
