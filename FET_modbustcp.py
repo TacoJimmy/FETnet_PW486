@@ -241,9 +241,9 @@ def power_count():
     with open('static/data/PowerLoop01.json', 'r') as f:
         power_kwh01 = json.load(f)
     f.close
-    power_kwh01["power03_kwh"]=power_kwh01["power03_kwh"] + (powermeter01[0][0]["data"][0]["values"]["power"]/240)
-    power_kwh01["power04_kwh"]=power_kwh01["power04_kwh"] + (powermeter01[1][0]["data"][0]["values"]["power"]/240)
-    power_kwh01["power05_kwh"]=power_kwh01["power05_kwh"] + (powermeter01[2][0]["data"][0]["values"]["power"]/240)
+    power_kwh01["power03_kwh"]=round(power_kwh01["power03_kwh"] + (powermeter01[0][0]["data"][0]["values"]["power"])/240)
+    power_kwh01["power04_kwh"]=round(power_kwh01["power04_kwh"] + (powermeter01[1][0]["data"][0]["values"]["power"])/240)
+    power_kwh01["power05_kwh"]=round(power_kwh01["power05_kwh"] + (powermeter01[2][0]["data"][0]["values"]["power"])/240)
     
     with open('static/data/PowerLoop01.json', 'w') as g:
         json.dump(power_kwh01, g)
@@ -255,9 +255,9 @@ def power_count():
     with open('static/data/PowerLoop02.json', 'r') as f:
         power_kwh02 = json.load(f)
     f.close
-    power_kwh02["power06_kwh"]=power_kwh02["power06_kwh"] + (powermeter02[0][0]["data"][0]["values"]["power"]/240)
-    power_kwh02["power07_kwh"]=power_kwh02["power07_kwh"] + (powermeter02[1][0]["data"][0]["values"]["power"]/240)
-    power_kwh02["power08_kwh"]=power_kwh02["power08_kwh"] + (powermeter02[2][0]["data"][0]["values"]["power"]/240)
+    power_kwh02["power06_kwh"]=round(power_kwh02["power06_kwh"] + (powermeter02[0][0]["data"][0]["values"]["power"])/240)
+    power_kwh02["power07_kwh"]=round(power_kwh02["power07_kwh"] + (powermeter02[1][0]["data"][0]["values"]["power"])/240)
+    power_kwh02["power08_kwh"]=round(power_kwh02["power08_kwh"] + (powermeter02[2][0]["data"][0]["values"]["power"])/240)
     with open('static/data/PowerLoop02.json', 'w') as g:
         json.dump(power_kwh02, g)
     g.close
