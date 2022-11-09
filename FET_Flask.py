@@ -285,7 +285,7 @@ def save_data(a, b):
         json.dump(subpower02, csvfile)
     a.close
     with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-SubLoop02.json", "a", newline="")as csvfile:
-        csv.dump(subpower02, csvfile)
+        json.dump(subpower02, csvfile)
     csvfile.close
 
     with open('static/data/PowerSubLoop03.json', 'r') as a:
