@@ -19,7 +19,7 @@ class Config(object):
             'func': '__main__:publish_PowerMeter',
             'args': (1, 2),   
             'trigger': 'interval',
-            'minutes': 1
+            'minutes': 2
             #'seconds': 20
             
         },
@@ -29,6 +29,13 @@ class Config(object):
             'args': (1, 2),   
             'trigger': 'interval',
             'seconds': 15 
+        },
+        {
+            'id': 'save_data',  
+            'func': '__main__:save_data',
+            'args': (1, 2),   
+            'trigger': 'interval',
+            'minutes': 5
         }
     ]
     SCHEDULER_API_ENABLED = True
@@ -261,7 +268,62 @@ def read_com1(a, b):
     except:
         pass
     
+
+def save_data(a, b):
+
+    datatime = time.strftime("%Y-%m-%d-%H:%M:%S")
+    with open('static/data/PowerSubLoop01.json', 'r') as a:
+        subpower01 = json.load(a)
+        subpower01["datatime"] = str(datatime)
+    a.close
+    with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-SubLoop01.json", "a", newline="")as csvfile:
+        json.dump(subpower01, csvfile)
+    csvfile.close
     
+    with open('static/data/PowerSubLoop02.json', 'r') as a:
+        subpower02 = json.load(a)
+        json.dump(subpower02, csvfile)
+    a.close
+    with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-SubLoop02.json", "a", newline="")as csvfile:
+        csv.dump(subpower02, csvfile)
+    csvfile.close
+
+    with open('static/data/PowerSubLoop03.json', 'r') as a:
+        subpower03 = json.load(a)
+        subpower03["datatime"] = str(datatime)
+    a.close
+    with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-SubLoop03.json", "a", newline="")as csvfile:
+        json.dump(subpower03, csvfile)
+    csvfile.close
+
+    with open('static/data/PowerSubLoop04.json', 'r') as a:
+        subpower04 = json.load(a)
+        subpower04["datatime"] = str(datatime)
+    a.close
+    with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-SubLoop04.json", "a", newline="")as csvfile:
+        json.dump(subpower04, csvfile)
+    csvfile.close
+
+    with open('static/data/PowerSubLoop05.json', 'r') as a:
+        subpower05 = json.load(a)
+        subpower05["datatime"] = str(datatime)
+    a.close
+    with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-SubLoop05.json", "a", newline="")as csvfile:
+        json.dump(subpower05, csvfile)
+    csvfile.close
+
+    with open('static/data/PowerSubLoop06.json', 'r') as a:
+        subpower06 = json.load(a)
+        subpower06["datatime"] = str(datatime)
+    a.close
+    with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-SubLoop06.json", "a", newline="")as csvfile:
+        json.dump(subpower06, csvfile)
+    csvfile.close
+
+    
+
+    
+
 if __name__ == '__main__':
     
     app.config.from_object(Config())
