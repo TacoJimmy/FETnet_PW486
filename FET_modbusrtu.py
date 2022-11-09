@@ -148,17 +148,17 @@ def get_MainPayLoad(payload1,payload2):
     try:
         if payload1[7] == 1:
             clamp[0]["voltage"]=round(payload1[0])
-            clamp[0]["current_r"]=round(payload1[1]*2.2,1)
-            clamp[0]["current_s"]=round(payload1[2]*2.2,1)
-            clamp[0]["current_t"]=round(payload1[3]*2.2,1)
+            clamp[0]["current_r"]=round(payload1[1],1)
+            clamp[0]["current_s"]=round(payload1[2],1)
+            clamp[0]["current_t"]=round(payload1[3],1)
             clamp[0]["temperature_r"]=35
             clamp[0]["temperature_s"]=35
             clamp[0]["temperature_t"]=35
-            clamp[0]["power"]= round(payload1[4]*2.2,1)
+            clamp[0]["power"]= round(payload1[4],1)
             clamp[0]["pf"]= round(payload1[5])
-            clamp[0]["energy"] = round(payload1[6]*2.2,1)
+            clamp[0]["energy"] = round(payload1[6],1)
             clamp[0]["alive"]= 1
-            clamp[0]["dm"]= round(payload1[8]*2.2)
+            clamp[0]["dm"]= round(payload1[8])
             payload_data = [{"values":clamp}]
         else:
             clamp[0]["voltage"]=0
@@ -178,17 +178,17 @@ def get_MainPayLoad(payload1,payload2):
         
         if payload2[7] == 1:
             clamp[1]["voltage"]=round(payload2[0])
-            clamp[1]["current_r"]=round(payload2[1]*2.2,1)
-            clamp[1]["current_s"]=round(payload2[2]*2.2,1)
-            clamp[1]["current_t"]=round(payload2[3]*2.2,1)
+            clamp[1]["current_r"]=round(payload2[1],1)
+            clamp[1]["current_s"]=round(payload2[2],1)
+            clamp[1]["current_t"]=round(payload2[3],1)
             clamp[1]["temperature_r"]=35
             clamp[1]["temperature_s"]=35
             clamp[1]["temperature_t"]=35
-            clamp[1]["power"]= round(payload2[4]*2.2,1)
+            clamp[1]["power"]= round(payload2[4],1)
             clamp[1]["pf"]= round(payload2[5])
-            clamp[1]["energy"] = round(payload2[6]*2.2,1)
+            clamp[1]["energy"] = round(payload2[6],1)
             clamp[1]["alive"]= 1
-            clamp[1]["dm"]= payload2[8]*2.2
+            clamp[1]["dm"]= payload2[8]
             payload_data = [{"values":clamp}]
         else:
             clamp[1]["voltage"]=0
