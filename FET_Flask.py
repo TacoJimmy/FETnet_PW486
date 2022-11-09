@@ -272,6 +272,7 @@ def read_com1(a, b):
 def save_data(a, b):
 
     datatime = time.strftime("%Y-%m-%d-%H:%M:%S")
+
     with open('static/data/PowerSubLoop01.json', 'r') as a:
         subpower01 = json.load(a)
         subpower01["datatime"] = str(datatime)
@@ -282,7 +283,7 @@ def save_data(a, b):
     
     with open('static/data/PowerSubLoop02.json', 'r') as a:
         subpower02 = json.load(a)
-        json.dump(subpower02, csvfile)
+        subpower02["datatime"] = str(datatime)
     a.close
     with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-SubLoop02.json", "a", newline="")as csvfile:
         json.dump(subpower02, csvfile)
@@ -320,8 +321,45 @@ def save_data(a, b):
         json.dump(subpower06, csvfile)
     csvfile.close
 
-    
+    with open('static/data/PowerSubLoop07.json', 'r') as a:
+        subpower07 = json.load(a)
+        subpower07["datatime"] = str(datatime)
+    a.close
+    with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-SubLoop07.json", "a", newline="")as csvfile:
+        json.dump(subpower07, csvfile)
+    csvfile.close
 
+    with open('static/data/PowerSubLoop08.json', 'r') as a:
+        subpower08 = json.load(a)
+        subpower08["datatime"] = str(datatime)
+    a.close
+    with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-SubLoop08.json", "a", newline="")as csvfile:
+        json.dump(subpower08, csvfile)
+    csvfile.close
+    
+    with open('static/data/PowerMainLoop01.json', 'r') as a:
+        mainpower01 = json.load(a)
+        mainpower01["datatime"] = str(datatime)
+    a.close
+    with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-MainLoop01.json", "a", newline="")as csvfile:
+        json.dump(mainpower01, csvfile)
+    csvfile.close
+
+    with open('static/data/PowerMainLoop02.json', 'r') as a:
+        mainpower02 = json.load(a)
+        mainpower02["datatime"] = str(datatime)
+    a.close
+    with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-MainLoop02.json", "a", newline="")as csvfile:
+        json.dump(mainpower02, csvfile)
+    csvfile.close
+    
+    with open('static/data/ipc.json', 'r') as a:
+        ipc_data = json.load(a)
+        ipc_data["datatime"] = str(datatime)
+    a.close
+    with open("/media/mmcblk0p1/"+time.strftime("%Y-%m-%d")+"-ipc_data.json", "a", newline="")as csvfile:
+        json.dump(ipc_data, csvfile)
+    csvfile.close
     
 
 if __name__ == '__main__':
