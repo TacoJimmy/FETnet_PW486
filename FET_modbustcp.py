@@ -56,7 +56,7 @@ def getPowerLoop01(HOST_Addr, HOST_Port, voltage, pf):
             clamp[i]["battery_r"]=clamp32[i*9+2]
             clamp[i]["battery_s"]=clamp32[i*9+5]
             clamp[i]["battery_t"]=clamp32[i*9+8]
-            clamp[i]["power"]= round((380*(clamp32[i*9]+clamp32[i*9+3]+clamp32[i*9+6]))/3000,1)
+            clamp[i]["power"]= round((220*(clamp32[i*9]+clamp32[i*9+3]+clamp32[i*9+6]))/1000,1)
             clamp[i]["pf"]= pf
             clamp[i]["alive"]= 1
             payload_data = [{"values":clamp[i]}]
