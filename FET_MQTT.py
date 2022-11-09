@@ -311,39 +311,62 @@ def IPC_Data():
         b.close
         
         TotalMainPower = float(mainpower01["power"])+float(mainpower02["power"])
+        TotalMainEnergy = float(mainpower01["energy"])+float(mainpower02["energy"])
         
         TotalDM = float(mainpower01["dm"])+float(mainpower02["dm"])
         
         TotalACPower = ACpower01["power"]+ACpower02["power"]
+        TotalACEnergy = ACpower01["energy"]+ACpower02["energy"]
         
         TotalSocketPower = SocketPower01["power"]+SocketPower02["power"]
+        TotalSocketEnergy = SocketPower01["energy"]+SocketPower02["energy"]
+        
         
         TotalLightPower = LightPower01["power"]+LightPower02["power"]
+        TotalLightEnergy = LightPower01["energy"]+LightPower02["energy"]
         
         TotalBackupPower = BackupPower01["power"]+BackupPower02["power"]
+        TotalBackupEnergy = BackupPower01["energy"]+BackupPower02["energy"]
         
         
         if TotalMainPower != 0:
             clamp[0]["Main_Power"] = round(TotalMainPower,1)
+            clamp[0]["Main_Energy"] = round(TotalMainEnergy,1)
             clamp[0]["dm"] = round(TotalDM,1)
+
             clamp[0]["ACPower"] = round(TotalACPower,1)
+            clamp[0]["ACEnergy"] = round(TotalACEnergy,1)
             clamp[0]["ACPower_prece"] = round(TotalACPower / TotalMainPower*100,1)
+
             clamp[0]["SocketPower"] = round(TotalSocketPower,1)
+            clamp[0]["SocketEnergy"] = round(TotalSocketEnergy,1)
             clamp[0]["SocketPower_p"] = round(TotalSocketPower / TotalMainPower*100,1)
+
             clamp[0]["LightPower"] = round(TotalLightPower,1)
+            clamp[0]["LightEngergy"] = round(TotalLightEnergy,1)
             clamp[0]["LightPower_p"] = round(TotalLightPower / TotalMainPower*100,1)
             clamp[0]["BackupPower"] = round(TotalBackupPower,1)
+            clamp[0]["BackupEnergy"] = round(TotalBackupEnergy,1)
             clamp[0]["BackupPower_p"] = round(TotalBackupPower / TotalMainPower*100,1)
         else:
             clamp[0]["Main_Power"] = 0
+            clamp[0]["Main_Energy"] = 0 
             clamp[0]["dm"] = 0
+
             clamp[0]["ACPower"] = 0
+            clamp[0]["ACEnergy"]
             clamp[0]["ACPower_prece"] = 0
+
             clamp[0]["SocketPower"] = 0
+            clamp[0]["SocketEnergy"] = 0
             clamp[0]["SocketPower_p"] = 0
+
             clamp[0]["LightPower"] = 0
+            clamp[0]["LightEngergy"] = 0
             clamp[0]["LightPower_p"] = 0
+            
             clamp[0]["BackupPower"] = 0
+            clamp[0]["BackupEnergy"] = 0
             clamp[0]["BackupPower_p"] = 0
         
 
