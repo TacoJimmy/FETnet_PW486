@@ -143,13 +143,22 @@
                         $IPCData.text("");
                         $IPCData.append("power[kW] : " + data.Main_Power + "<br>");
 						$IPCData.append("DM[W] : " + data.dm + "<br>");
+                        $IPCData.append("energy[kWh] : " + data.Main_Energy + "<br>");
+
 						$IPCData.append("ACPower[kW] : " + data.ACPower + "<br>");
+                        $IPCData.append("ACEnergy[kWh] : " + data.ACEnergy + "<br>");
 						$IPCData.append("ACPower[%] : " + data.ACPower_prece + "<br>");
+
 						$IPCData.append("SocketPower[kW] : " + data.SocketPower + "<br>");
+                        $IPCData.append("SocketEnergy[kWh] : " + data.SocketEnergy + "<br>");
 						$IPCData.append("SocketPower[%] : " + data.SocketPower_p + "<br>");
+
 						$IPCData.append("LightPower[kW] : " + data.LightPower + "<br>");
+                        $IPCData.append("LightEnergy[kWh] : " + data.LightEnergy + "<br>");
 						$IPCData.append("LightPower[%] : " + data.LightPower_p + "<br>");
+
 						$IPCData.append("BackupPower[kW] : " + data.BackupPower + "<br>");
+                        $IPCData.append("BackupEnergy[kWh] : " + data.BackupEnergy + "<br>");
 						$IPCData.append("BackupPower_p[%] : " + data.BackupPower_p + "<br>");
                         
                     },
