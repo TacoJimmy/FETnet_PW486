@@ -35,7 +35,7 @@ class Config(object):
             'func': '__main__:save_data',
             'args': (1, 2),   
             'trigger': 'interval',
-            'minutes': 5
+            'minutes': 1
         }
     ]
     SCHEDULER_API_ENABLED = True
