@@ -225,7 +225,7 @@ def MqttPublish():
         MqttACSend(ACPayload)
         SubLoop01 = FET_modbustcp.getPowerLoop01('192.168.1.10',502,MainLoop01[0],MainLoop01[5])
         MqttSend(SubLoop01)
-        SubLoop02 = FET_modbustcp.getPowerLoop02('192.168.1.11',502,MainLoop01[0],MainLoop01[5])
+        SubLoop02 = FET_modbustcp.getPowerLoop02('192.168.1.11',502,MainLoop02[0],MainLoop02[5])
         MqttSend(SubLoop02)
         print("ok")
         
@@ -343,7 +343,7 @@ def IPC_Data():
             clamp[0]["SocketPower_p"] = round(TotalSocketPower / TotalMainPower*100,1)
 
             clamp[0]["LightPower"] = round(TotalLightPower,1)
-            clamp[0]["LightEngergy"] = round(TotalLightEnergy,1)
+            clamp[0]["LightEnergy"] = round(TotalLightEnergy,1)
             clamp[0]["LightPower_p"] = round(TotalLightPower / TotalMainPower*100,1)
             clamp[0]["BackupPower"] = round(TotalBackupPower,1)
             clamp[0]["BackupEnergy"] = round(TotalBackupEnergy,1)
@@ -364,7 +364,7 @@ def IPC_Data():
             clamp[0]["LightPower"] = 0
             clamp[0]["LightEngergy"] = 0
             clamp[0]["LightPower_p"] = 0
-            
+
             clamp[0]["BackupPower"] = 0
             clamp[0]["BackupEnergy"] = 0
             clamp[0]["BackupPower_p"] = 0
