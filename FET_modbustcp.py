@@ -248,7 +248,9 @@ def power_count():
     with open('static/data/PowerLoop01.json', 'w') as g:
         json.dump(power_kwh01, g)
     g.close
-    
+    print (power_kwh01["power03_kwh"])
+    print (power_kwh01["power04_kwh"])
+    print (power_kwh01["power05_kwh"])
     
     powermeter02 = (getPowerLoop02('192.168.1.11',502,380,0.9))
     
@@ -261,10 +263,18 @@ def power_count():
     with open('static/data/PowerLoop02.json', 'w') as g:
         json.dump(power_kwh02, g)
     g.close
-    
+    print (power_kwh02["power06_kwh"])
+    print (power_kwh02["power07_kwh"])
+    print (power_kwh02["power08_kwh"])
     
 if __name__ == '__main__':
     
+
+
+    power_count()
+
+
+    '''
     power_kwh01 = {}
     power_kwh02 = {}
     powermeter01 = (getPowerLoop01('192.168.1.10',502,380,0.9))
@@ -302,3 +312,4 @@ if __name__ == '__main__':
     print (power_kwh02["power06_kwh"])
     print (power_kwh02["power07_kwh"])
     print (power_kwh02["power08_kwh"])
+    '''
