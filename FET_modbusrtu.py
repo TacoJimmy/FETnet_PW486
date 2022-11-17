@@ -266,9 +266,9 @@ def get_ACPayLoad(payload1,payload2):
         clamp[1]["current_r"]=payload2[1]
         clamp[1]["current_s"]=payload2[2]
         clamp[1]["current_t"]=payload2[3]
-        clamp[1]["temperature_r"]=0
-        clamp[1]["temperature_s"]=0
-        clamp[1]["temperature_t"]=0
+        clamp[1]["temperature_r"]=35
+        clamp[1]["temperature_s"]=35
+        clamp[1]["temperature_t"]=35
         clamp[1]["power"]= payload2[4]
         clamp[1]["pf"]= payload2[5]
         clamp[1]["energy"] = payload2[6]
@@ -319,7 +319,9 @@ if __name__ == '__main__':
     #print(read_Main_PowerMeter('/dev/ttyS1',2,1))
     
     MainLoop01 = read_Main_PowerMeter('/dev/ttyS1',1,1)
+    print (MainLoop01)
     MainLoop02 = read_Main_PowerMeter('/dev/ttyS1',2,1)
+    print (MainLoop02)
     MainPayload = get_MainPayLoad(MainLoop01,MainLoop02)
     
     
