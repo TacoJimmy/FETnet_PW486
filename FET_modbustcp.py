@@ -177,7 +177,7 @@ def getPowerLoop02(HOST_Addr, HOST_Port, voltage, pf):
         clamp[1]["current_r"]=clamp[1]["current_r"]-clamp[2]["current_r"]
         clamp[1]["current_s"]=clamp[1]["current_s"]-clamp[2]["current_s"]
         clamp[1]["current_t"]=clamp[1]["current_t"]-clamp[2]["current_t"]
-        clamp[1]["power"]= clamp[1]["power"]-clamp[2]["power"]
+        clamp[1]["power"]= round(clamp[1]["power"]-clamp[2]["power"],1)
     
     with open('static/data/PowerLoop02.json', 'r') as f:
         power_kwh02 = json.load(f)
