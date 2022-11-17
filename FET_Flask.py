@@ -181,7 +181,7 @@ def setDataCOM01():
                 'COM01_StopBits': request.form['COM01_StopBits'],
             }
         }
-        print(type(data))
+        #print(type(data))
         with open('static/data/COM01.json', 'w') as f:
             json.dump(data, f)
         f.close
@@ -199,7 +199,7 @@ def setDataCOM02():
                 'COM02_StopBits': request.form['COM02_StopBits'],
             }
         }
-        print(type(data))
+        #print(type(data))
         with open('static/data/COM02.json', 'w') as f:
             json.dump(data, f)
         f.close
@@ -214,7 +214,7 @@ def setDataTCP01():
                 'TCP01_PORT': request.form['TCP01_PORT'],
             }
         }
-        print(type(data))
+        #print(type(data))
         with open('static/data/TCP01.json', 'w') as f:
             json.dump(data, f)
         f.close
@@ -229,7 +229,7 @@ def setDataTCP02():
                 'TCP02_PORT': request.form['TCP02_PORT'],
             }
         }
-        print(type(data))
+        #print(type(data))
         with open('static/data/TCP02.json', 'w') as f:
             json.dump(data, f)
         f.close
@@ -248,7 +248,7 @@ def setDataMqtt01():
                 'MQTT_SSL': request.form['MQTT_SSL'],
             }
         }
-        print(type(data))
+        #print(type(data))
         with open('static/data/mqtt01.json', 'w') as f:
             json.dump(data, f)
         f.close
