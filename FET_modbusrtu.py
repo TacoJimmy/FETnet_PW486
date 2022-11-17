@@ -318,12 +318,14 @@ if __name__ == '__main__':
     #print(read_Main_PowerMeter('/dev/ttyS1',1,1))
     #print(read_Main_PowerMeter('/dev/ttyS1',2,1))
     
-    MainLoop01 = read_Main_PowerMeter('/dev/ttyS1',1,1)
+    #MainLoop01 = read_Main_PowerMeter('/dev/ttyS1',1,1)
+    #print (MainLoop01[7])
+    #MainLoop02 = read_Main_PowerMeter('/dev/ttyS1',2,1)
+    #print (MainLoop02[7])
+    #MainPayload = get_MainPayLoad(MainLoop01,MainLoop02)
+
+    MainLoop01 = read_3p3w_meter('/dev/ttyS1',3,1)
     print (MainLoop01[7])
-    MainLoop02 = read_Main_PowerMeter('/dev/ttyS1',2,1)
-    print (MainLoop02[7])
-    MainPayload = get_MainPayLoad(MainLoop01,MainLoop02)
-    
     
     '''
     #print (getCom1_Power('/dev/ttyS1',1,1))
