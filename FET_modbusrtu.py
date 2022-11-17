@@ -326,7 +326,8 @@ if __name__ == '__main__':
 
     MainLoop01 = read_3p3w_meter('/dev/ttyS1',3,1)
     print (MainLoop01[7])
-    
+    MainLoop01 = read_3p3w_meter('/dev/ttyS1',4,1)
+    print (MainLoop01[7])
     '''
     #print (getCom1_Power('/dev/ttyS1',1,1))
     #air condition 1
