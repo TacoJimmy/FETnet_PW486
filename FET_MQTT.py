@@ -408,7 +408,7 @@ def Pub_infor():
              "app": PowerInfor["MainLoop01"]["app"],
              "type": PowerInfor["MainLoop01"]["type"],
              "data": PowerInfor["MainLoop01"]["data"]}]
-        print (Mqttinfor['appInfo']['MQTT_UserName'])
+        #print (Mqttinfor['appInfo']['MQTT_UserName'])
     
         client = mqtt.Client('', True, None, mqtt.MQTTv31)
         client.username_pw_set(Mqttinfor['appInfo']['MQTT_UserName'], Mqttinfor['appInfo']['MQTT_Password'])
