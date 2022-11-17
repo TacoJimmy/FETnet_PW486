@@ -241,7 +241,7 @@ def get_MainPayLoad(payload1,payload2):
     with open('static/data/PowerMainLoop02.json', 'w') as f:
         json.dump(PowerPayload[1][0]["data"][0]["values"], f)
     f.close
-    print (PowerPayload)
+    #print (PowerPayload)
     return PowerPayload
 
 def get_ACPayLoad(payload1,payload2):
