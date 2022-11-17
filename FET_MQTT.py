@@ -215,8 +215,19 @@ def Mainloop02Cal():
 '''
 def MqttPublish():
     try:
+        
         MainLoop01 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',1,1)
+        if MainLoop01[7]!=1:
+            for i in range(3):
+                MainLoop01 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',1,1)
+                if(MainLoop01[7]==1):
+                    break
         MainLoop02 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',2,1)
+        if MainLoop01[7]!=1:
+            for i in range(3):
+                MainLoop02 = FET_modbusrtu.read_Main_PowerMeter('/dev/ttyS1',2,1)
+                if(MainLoop02[7]==1):
+                    break
         MainPayload = FET_modbusrtu.get_MainPayLoad(MainLoop01,MainLoop02)
         MqttMainSend(MainPayload)
         SubACLoop01 = FET_modbusrtu.read_3p3w_meter('/dev/ttyS1',3,1)
