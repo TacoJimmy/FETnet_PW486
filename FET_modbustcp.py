@@ -47,9 +47,9 @@ def getPowerLoop01(HOST_Addr, HOST_Port, voltage, pf):
     
         for i in range(3):
             clamp[i]["voltage"]=voltage
-            clamp[i]["current_r"]=round(clamp32[i*9])
-            clamp[i]["current_s"]=round(clamp32[i*9+3])
-            clamp[i]["current_t"]=round(clamp32[i*9+6])
+            clamp[i]["current_r"]=abs(round(clamp32[i*9]))
+            clamp[i]["current_s"]=abs(round(clamp32[i*9+3]))
+            clamp[i]["current_t"]=abs(round(clamp32[i*9+6]))
             clamp[i]["temperature_r"]=clamp32[i*9+1]
             clamp[i]["temperature_s"]=clamp32[i*9+4]
             clamp[i]["temperature_t"]=clamp32[i*9+7]
@@ -78,9 +78,9 @@ def getPowerLoop01(HOST_Addr, HOST_Port, voltage, pf):
             clamp[i]["alive"]= 2
             payload_data = [{"values":clamp[i]}]
     if clamp[1]["alive"] == 1 :
-        clamp[1]["current_r"]=clamp[1]["current_r"]-clamp[0]["current_r"]
-        clamp[1]["current_s"]=clamp[1]["current_s"]-clamp[0]["current_s"]
-        clamp[1]["current_t"]=clamp[1]["current_t"]-clamp[0]["current_t"]
+        clamp[1]["current_r"]=abs(clamp[1]["current_r"]-clamp[0]["current_r"])
+        clamp[1]["current_s"]=abs(clamp[1]["current_s"]-clamp[0]["current_s"])
+        clamp[1]["current_t"]=abs(clamp[1]["current_t"]-clamp[0]["current_t"])
         clamp[1]["power"]= clamp[1]["power"]-clamp[0]["power"]
     
     with open('static/data/PowerLoop01.json', 'r') as f:
@@ -142,9 +142,9 @@ def getPowerLoop02(HOST_Addr, HOST_Port, voltage, pf):
     
         for i in range(3):
             clamp[i]["voltage"]=voltage
-            clamp[i]["current_r"]=clamp32[i*9]
-            clamp[i]["current_s"]=clamp32[i*9+3]
-            clamp[i]["current_t"]=clamp32[i*9+6]
+            clamp[i]["current_r"]=abs(clamp32[i*9])
+            clamp[i]["current_s"]=abs(clamp32[i*9+3])
+            clamp[i]["current_t"]=abs(clamp32[i*9+6])
             clamp[i]["temperature_r"]=clamp32[i*9+1]
             clamp[i]["temperature_s"]=clamp32[i*9+4]
             clamp[i]["temperature_t"]=clamp32[i*9+7]
@@ -174,9 +174,9 @@ def getPowerLoop02(HOST_Addr, HOST_Port, voltage, pf):
             payload_data = [{"values":clamp[i]}]
     
     if clamp[1]["alive"] == 1 :
-        clamp[1]["current_r"]=clamp[1]["current_r"]-clamp[2]["current_r"]
-        clamp[1]["current_s"]=clamp[1]["current_s"]-clamp[2]["current_s"]
-        clamp[1]["current_t"]=clamp[1]["current_t"]-clamp[2]["current_t"]
+        clamp[1]["current_r"]=abs(clamp[1]["current_r"]-clamp[2]["current_r"])
+        clamp[1]["current_s"]=abs(clamp[1]["current_s"]-clamp[2]["current_s"])
+        clamp[1]["current_t"]=abs(clamp[1]["current_t"]-clamp[2]["current_t"])
         clamp[1]["power"]= round(clamp[1]["power"]-clamp[2]["power"],1)
     
     with open('static/data/PowerLoop02.json', 'r') as f:
